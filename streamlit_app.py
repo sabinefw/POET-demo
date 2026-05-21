@@ -13,12 +13,14 @@ from pyvis.network import Network
 from Concurrent import Concurrent
 from cco_service import CCOService
 
-TAB_PANEL_HEIGHT = 610
-PANEL_BOX_TOP_GAP = 18
-LOGWISE_BOX_HEIGHT = TAB_PANEL_HEIGHT - 24 - PANEL_BOX_TOP_GAP
+UI_SCALE = 0.8
+TAB_PANEL_HEIGHT = round(610 * UI_SCALE)
+PANEL_BOX_TOP_GAP = round(18 * UI_SCALE)
+PANEL_BOX_VERTICAL_RESERVE = round(24 * UI_SCALE)
+LOGWISE_BOX_HEIGHT = TAB_PANEL_HEIGHT - PANEL_BOX_VERTICAL_RESERVE - PANEL_BOX_TOP_GAP
 TRACEWISE_BOX_HEIGHT = LOGWISE_BOX_HEIGHT
-CONCURRENCY_LIST_HEIGHT = LOGWISE_BOX_HEIGHT - 235
-PO_TRACE_LIST_HEIGHT = LOGWISE_BOX_HEIGHT - 200
+CONCURRENCY_LIST_HEIGHT = LOGWISE_BOX_HEIGHT - round(235 * UI_SCALE)
+PO_TRACE_LIST_HEIGHT = LOGWISE_BOX_HEIGHT - round(200 * UI_SCALE)
 
 # ONLY VISUAL FIX
 st.set_page_config(layout="wide")
@@ -26,11 +28,15 @@ st.markdown(
     """
     <style>
     :root {
+        --ui-scale: __UI_SCALE__;
         --app-height: 100vh;
         --panel-height: calc(var(--app-height) - 9.6rem);
         --column-height: calc(var(--panel-height) - 1.35rem);
         --tab-border-color: #000000;
         --tab-border-width: 1px;
+    }
+    html {
+        font-size: calc(16px * var(--ui-scale));
     }
     div[data-testid="stAppViewContainer"] .main .block-container,
     div[data-testid="stAppViewContainer"] [data-testid="block-container"],
@@ -265,7 +271,7 @@ st.markdown(
         fill: #16a34a !important;
     }
     </style>
-    """,
+    """.replace("__UI_SCALE__", str(UI_SCALE)),
     unsafe_allow_html=True,
 )
 
@@ -284,7 +290,7 @@ components.html(
 )
 
 st.title("POET - Partial Order Extractor Tool")
-st.markdown('<div style="height: 0.5cm;"></div>', unsafe_allow_html=True)
+st.markdown('<div style="height: calc(0.5cm * var(--ui-scale));"></div>', unsafe_allow_html=True)
 
 # Service initialisieren
 if "cco_service" not in st.session_state:
