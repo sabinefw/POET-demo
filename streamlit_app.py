@@ -1010,6 +1010,8 @@ tab_logwise_bg = "#ffffff" if st.session_state["active_scope"] == "logwise" else
 tab_tracewise_bg = "#ffffff" if st.session_state["active_scope"] == "tracewise" else "#f0f2f6"
 tab_logwise_bottom = "#ffffff" if st.session_state["active_scope"] == "logwise" else "#000000"
 tab_tracewise_bottom = "#ffffff" if st.session_state["active_scope"] == "tracewise" else "#000000"
+tab_logwise_color = "#111827" if st.session_state["active_scope"] == "logwise" else "#9ca3af"
+tab_tracewise_color = "#111827" if st.session_state["active_scope"] == "tracewise" else "#9ca3af"
 
 st.markdown(
     f"""
@@ -1021,7 +1023,6 @@ st.markdown(
         border: 1px solid #000000 !important;
         border-radius: 0.7rem 0.7rem 0 0 !important;
         box-shadow: none !important;
-        color: #374151 !important;
         font-weight: 500 !important;
         font-size: 2rem !important;
         margin: 0 !important;
@@ -1038,14 +1039,24 @@ st.markdown(
     .st-key-tab_btn_logwise button {{
         background: {tab_logwise_bg} !important;
         border-bottom-color: {tab_logwise_bottom} !important;
+        color: {tab_logwise_color} !important;
         margin-bottom: -1px !important;
         z-index: {2 if st.session_state["active_scope"] == "logwise" else 1};
     }}
     .st-key-tab_btn_tracewise button {{
         background: {tab_tracewise_bg} !important;
         border-bottom-color: {tab_tracewise_bottom} !important;
+        color: {tab_tracewise_color} !important;
         margin-bottom: -1px !important;
         z-index: {2 if st.session_state["active_scope"] == "tracewise" else 1};
+    }}
+    .st-key-tab_btn_logwise button p,
+    .st-key-tab_btn_logwise button div[data-testid="stMarkdownContainer"] p {{
+        color: {tab_logwise_color} !important;
+    }}
+    .st-key-tab_btn_tracewise button p,
+    .st-key-tab_btn_tracewise button div[data-testid="stMarkdownContainer"] p {{
+        color: {tab_tracewise_color} !important;
     }}
     .st-key-tab_btn_logwise button:focus,
     .st-key-tab_btn_logwise button:focus-visible,
