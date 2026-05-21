@@ -779,7 +779,7 @@ def render_logwise_content(mode, uploaded_file):
         st.markdown('<div class="section-spacer"></div>', unsafe_allow_html=True)
 
         if uploaded_file:
-            button_col_compute, button_col_save = st.columns([1.35, 0.95])
+            button_col_compute, button_col_save_spacer, button_col_save = st.columns([2.26, 0.12, 0.51], gap="small")
 
             with button_col_compute:
                 if st.button(
@@ -810,8 +810,9 @@ def render_logwise_content(mode, uploaded_file):
 
             with button_col_save:
                 if st.button(
-                    "Save Changes",
+                    "Save",
                     disabled=not st.session_state.get(f"cc_done_{mode}_logwise", False),
+                    use_container_width=True,
                 ):
                     scope_key = make_scope_key(mode, "logwise")
                     selected_concurrencies = st.session_state.get("user_concurrencies", {}).get(scope_key, set())
@@ -840,7 +841,7 @@ def render_logwise_content(mode, uploaded_file):
 
             activity_options = get_activity_options(mode, "logwise")
             if activity_options:
-                add_col_a, add_col_arrow, add_col_b, add_col_button = st.columns([1.11, 0.12, 1.11, 0.43], gap="small")
+                add_col_a, add_col_arrow, add_col_b, add_col_button = st.columns([1.07, 0.12, 1.07, 0.51], gap="small")
 
                 with add_col_a:
                     activity_a = st.selectbox(
